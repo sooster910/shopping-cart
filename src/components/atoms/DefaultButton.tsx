@@ -1,15 +1,15 @@
-import { Button } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 import * as React from "react";
 
-export type DefaultButtonProps = {
+export interface DefaultButtonProps extends ButtonProps {
   children: React.ReactNode;
-  color?: string;
   variation?: string;
-};
+  onClick?: (e) => void;
+}
 
 export const DefalutButton = ({ children, ...props }: DefaultButtonProps) => {
   return (
-    <Button colorScheme={props.color} variant={props.variation} {...props}>
+    <Button variant={props.variation} {...props}>
       {children}
     </Button>
   );
