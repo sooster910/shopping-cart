@@ -1,5 +1,75 @@
 # E-Commerce Shopping Cart with react-query
 
+## Demo Page
+
+## File Structure / Architecture Used
+
+## Functionalities
+
+### 필수 기능
+
+<input type="checkbox" disabled checked /> 상품 리스트 카테고리 별로 렌더링
+<input type="checkbox" disabled checked />
+상세: 상품을 클릭할 시, 상품 상세 페이지로 이동
+
+<input type="checkbox" disabled /> 장바구니: 사용자가 원하는 상품을 장바구니에 추가할 수 있어야 합니다 - 진행중
+
+<input type="checkbox" disabled  /> 검색: 상품 리스트 내에서 검색을 할 수 있어야 합니다(단, 정렬 순서는 가장 검색 결과와 비슷한 상품 순서대로 노출합니다).
+
+### Page Routing
+
+<input type="checkbox" disabled checked /> Home Page -> /product 로 리디렉션
+
+<input type="checkbox" disabled checked /> 프로덕트 디테일 페이지 동적 라우팅 추가
+
+### Components 구현 및 로직
+
+<input type="checkbox" disabled checked /> 재사용 가능한 list component
+
+<input type="checkbox" disabled checked /> react-query 상품 디테일, 카테고리, preview fetch hook
+
+#### 제품 상세 페이지
+
+<input type="checkbox" disabled checked /> 상세페이지 query hook 과 연동
+
+<input type="checkbox" disabled checked /> 제품 디테일 정보 html string에서 JSX convert
+
+<input type="checkbox" disabled checked /> 상세페이지 UI구현
+
+<input type="checkbox" disabled  /> UI 분리 리팩토링 필요
+
+<input type="checkbox" disabled  /> react-query hook 관심사 분리, 부수효과 분리 리팩토링 필요
+
+#### 장바구니
+
+<input type="checkbox" disabled checked /> 장바구니 context api
+
+<input type="checkbox" disabled checked /> 장바구니 custom hook
+
+<input type="checkbox" disabled checked /> 장바구니 버튼 wire to context api
+
+<input type="checkbox" disabled checked /> localStroage 연동
+
+<input type="checkbox" disabled /> 장바구니 UI 컴포넌트
+
+#### 검색
+
+## Tech Stack/ Packages
+
+- React Query :
+- emotion
+- chakra-ui :
+- Typescript:
+- React Router Dom:
+
+## 본인이 수행한 Challenge에 대한 설명
+
+## 과제를 진행하면서 가장 자랑스러웠던 부분
+
+## 과제를 진행하면서 가장 아쉬웠던/어려웠던 부분
+
+## 참고 자료와 주소
+
 ## Available Scripts
 
 In the project directory, you can run:
