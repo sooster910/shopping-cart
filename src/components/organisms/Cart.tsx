@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useCartState } from "../../hooks/useCartState";
 import { List } from "../../layout/List";
+import { useCartDispatch } from "../../hooks/useCartDispatch";
 
 export const Cart = ({ btnRef, isOpen, onClose }) => {
   const getTotalPrice = (
@@ -21,10 +22,18 @@ export const Cart = ({ btnRef, isOpen, onClose }) => {
     qty: number,
     shppingPrice: number
   ): number => {
-    console.log(price, qty, shppingPrice);
     return price * qty + shppingPrice;
   };
+
   const cartState = useCartState();
+  const cartDispatch = useCartDispatch();
+
+  const handleDeleteBtn = (clickedId) => {
+    cartDispatch({
+      type: "REMOVE_FROM_CART",
+      payload: { cartId: clickedId },
+    });
+  };
   return (
     <Drawer
       isOpen={isOpen}
@@ -43,6 +52,8 @@ export const Cart = ({ btnRef, isOpen, onClose }) => {
             renderEmpty={<Text fontSize="6xl"> 상품이 없습니다.</Text>}
             renderItem={(item) => (
               <Card
+                enabledDelete={true}
+                handleDeleteBtn={handleDeleteBtn}
                 id={item.cartId}
                 imageUrl={item?.productDetail?.imageUrl}
                 imageAlt={item?.productDetail?.name}
@@ -50,10 +61,10 @@ export const Cart = ({ btnRef, isOpen, onClose }) => {
                 badge={item?.productDetail?.soldout ? <SoldOutBadge /> : null}
                 detail={item?.productDetail?.brand?.name}
               >
-                {Object.entries(item.productDetail.options).map((item, i) => (
+                {Object.entries(item.productDetail.options).map((option, i) => (
                   <Box key={i}>
                     <Text>
-                      {item[0]}:{item[1]}
+                      {option[0]}:{option[1]}
                     </Text>
                   </Box>
                 ))}

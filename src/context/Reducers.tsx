@@ -18,11 +18,15 @@ export const cartReducer = (state: CartState, action: Action): CartState => {
             : cartItem.qty
         ),
       };
-    // case "REMOVE_FROM_CART":
-    //   return {
-    //     ...state,
-    //     cart: state.cart.filter((c) => c.prefix !== action.payload.prefix),
-    //   };
+
+    case "REMOVE_FROM_CART":
+      return {
+        ...state,
+        cart: state.cart.filter(
+          (cartItem) => cartItem.cartId !== action?.payload?.cartId
+        ),
+      };
+
     default:
       return state;
   }

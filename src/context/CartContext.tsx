@@ -12,13 +12,14 @@ export type ProductForCart = {
 export type CartState = {
   cart: ProductForCart[];
 };
-
+export type cardId = string;
 export type Action =
   | {
       type: "ADD_TO_CART";
       payload: ProductForCart;
     }
-  | { type: "UPDATE_CART_QTY"; payload: { qty: number; cartId: string } };
+  | { type: "UPDATE_CART_QTY"; payload: { qty: number; cartId: string } }
+  | { type: "REMOVE_FROM_CART"; payload: { cartId: cardId } };
 
 export const CartStateContext = createContext<CartState | null>(null);
 export const CartDispatchContext = createContext<CartDispatch | null>(null);

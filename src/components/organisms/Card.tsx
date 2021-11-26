@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Image } from "@chakra-ui/react";
-import { Box } from "@chakra-ui/layout";
+import { Button, IconButton, Image } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
+import { DeleteIcon, DragHandleIcon } from "@chakra-ui/icons";
+import { DeleteBtn } from "../molecules/DeleteBtn";
 
 type CardProps = {
   id?: string;
@@ -12,6 +14,8 @@ type CardProps = {
   tag?: React.ReactNode;
   detail?: React.ReactNode;
   children?: React.ReactNode;
+  enabledDelete?: boolean;
+  handleDeleteBtn?: (e) => void;
 };
 export const Card = ({
   id,
@@ -22,10 +26,21 @@ export const Card = ({
   tag,
   detail,
   children,
+  enabledDelete = false,
+  handleDeleteBtn,
 }: CardProps) => {
   return (
     <>
-      <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+      <Box
+        maxW="sm"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        mb={3}
+      >
+        {enabledDelete && (
+          <DeleteBtn handleDeleteBtn={() => handleDeleteBtn(id)} />
+        )}
         <Link to={id ? `/product/${id}` : "#"}>
           {imageUrl && <Image src={imageUrl} alt={imageAlt} />}
         </Link>
