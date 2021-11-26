@@ -144,7 +144,7 @@ const ProductDetail = (props) => {
                 {data.options.length > 0 && (
                   <OptionForms
                     options={data.options}
-                    handleChange={handleSelectChange}
+                    handleSelectChange={handleSelectChange}
                   />
                 )}
                 <Box>
@@ -170,7 +170,7 @@ const ProductDetail = (props) => {
 
                 <AddToCart
                   prefix={data.prefix}
-                  handleClick={handleAddToCart}
+                  handleAddToCart={handleAddToCart}
                   text={"장바구니 추가"}
                   disabled={data.soldOut}
                 />

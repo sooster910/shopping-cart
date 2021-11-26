@@ -4,14 +4,14 @@ import { DefalutButton } from "../atoms/DefaultButton";
 import { AddIcon } from "@chakra-ui/icons";
 
 type AddToCartProps = {
-  handleClick: (e) => void;
+  handleAddToCart: (e) => void;
   text: string;
   prefix: string;
   disabled?: boolean;
 };
 
 export const AddToCart = ({
-  handleClick,
+  handleAddToCart,
   text,
   prefix,
   disabled = false,
@@ -22,7 +22,7 @@ export const AddToCart = ({
         isDisabled={disabled}
         rightIcon={<AddIcon />}
         colorScheme={"blue"}
-        onClick={() => handleClick(prefix)}
+        onClick={() => handleAddToCart(prefix)}
       >
         {text}
       </DefalutButton>

@@ -2,13 +2,13 @@ import { Input } from "@chakra-ui/react";
 import * as React from "react";
 import { DefaultSelect } from "../atoms/DefaultSlect";
 
-export const OptionForms = ({ options, handleChange }) => {
+export const OptionForms = ({ options, handleSelectChange }) => {
   return (
     <>
       {options.map((option) => {
         return option.type === "select" ? (
           <DefaultSelect
-            handleChange={handleChange}
+            handleChange={handleSelectChange}
             key={option.id}
             id={option.id}
             optionCategoryName={option.optionCategoryName || null}
