@@ -1,48 +1,27 @@
 import * as React from "react";
-import {
-  Box,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  Input,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";
+import { Button, useDisclosure } from "@chakra-ui/react";
+import { TiShoppingCart } from "react-icons/ti";
 import { Navbar } from "../components/organisms/Navbar";
-interface HeaderProps {}
+import { useCartState } from "../hooks/useCartState";
+import { Cart } from "../components/organisms/Cart";
 
-const Header: React.FunctionComponent<HeaderProps> = (props) => {
+const Header = () => {
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const cartState = useCartState();
+
   return (
     <>
       <Navbar>
-        {/* <Box bg="tomato" w="100%" p={4} color="white">
-          This is the Box
-        </Box> */}
-        <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-          Cart
-        </Button>
-        <Drawer
-          isOpen={isOpen}
-          placement="right"
-          onClose={onClose}
-          finalFocusRef={btnRef}
+        <Button
+          leftIcon={<TiShoppingCart />}
+          ref={btnRef}
+          colorScheme="teal"
+          onClick={onOpen}
         >
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerCloseButton />
-            <DrawerHeader>Create your account</DrawerHeader>
-
-            <DrawerBody>
-              <Input placeholder="Type here..." />
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer>
+          Cart({cartState.cart.length})
+        </Button>
+        <Cart btnRef={btnRef} isOpen={isOpen} onClose={onClose} />
       </Navbar>
     </>
   );
