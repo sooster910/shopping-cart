@@ -14,6 +14,7 @@ const Header = () => {
     <>
       <Navbar>
         <Button
+          m={4}
           leftIcon={<TiShoppingCart />}
           ref={btnRef}
           colorScheme="teal"
