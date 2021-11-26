@@ -45,8 +45,9 @@ export const SearchResult = ({ categoryId = 11, searchTerm = "" }) => {
   );
 
   if (queryResults) {
-    const a = queryResults.map((result) => result?.data?.products);
-    const filteredArr = a.length > 1 ? a[0]?.concat(...a.slice(1)) : a[0];
+    const results = queryResults.map((result) => result?.data?.products);
+    const filteredArr =
+      results.length > 1 ? results[0]?.concat(...results.slice(1)) : results[0];
 
     const search = filteredArr?.filter((item) =>
       item?.name?.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())
