@@ -1,23 +1,15 @@
-import { Button } from "@chakra-ui/button";
 import * as React from "react";
 import { useQuery } from "react-query";
+import { Button } from "@chakra-ui/button";
 import { List } from "../../layout/List";
-import CategoryType from "../../types/Category";
+import { fetchCategories } from "../../api/categoryAPI";
 
 type CategoriesProps = {
   props?: string;
+  handleClickCategory?: (e) => void;
 };
-// type Category = {
-//   name: string;
-//   id: string;
-// };
-const fetchCategories = async () => {
-  //   console.log("key", key);
-  //   console.log("greeting", greeting);
-  const resp = await fetch("https://mock-api.ssomee.com/categories");
-  return resp.json();
-};
-export const Categories = (props: CategoriesProps) => {
+
+export const Categories = ({ handleClickCategory }: CategoriesProps) => {
   const { data, status } = useQuery("categories", fetchCategories);
   return (
     <>
@@ -30,12 +22,17 @@ export const Categories = (props: CategoriesProps) => {
           renderItem={(item) => (
             <li>
               <Button
-                size="md"
+                _active={{
+                  bg: "teal",
+                  transform: "scale(0.98)",
+                  borderColor: "teal",
+                }}
                 height="48px"
                 width="200px"
                 border="2px"
                 borderColor="green.500"
                 css={{ display: "inline-block" }}
+                onClick={() => handleClickCategory(item.id)}
               >
                 {item?.name}
               </Button>
