@@ -115,6 +115,8 @@ data fetch로직을 관리합니다.
 
 - [x] react-query 상품 디테일, 카테고리, preview fetch hook
 
+- [x] 상품 리스트 페이지네이션 UI 및 로직 구현
+
 #### 제품 상세 페이지
 
 - [x] 상세페이지 query hook 과 연동
@@ -125,7 +127,7 @@ data fetch로직을 관리합니다.
 
 - [ ] UI 분리 리팩토링 필요
 
-- [x] react-query hook 관심사 분리, 부수효과 분리 리팩토링 필요
+- [ ] react-query hook 관심사 분리, 부수효과 분리 리팩토링 필요
 
 #### 장바구니
 
@@ -143,6 +145,7 @@ data fetch로직을 관리합니다.
 
 - [x] UI 컴포넌트
 - [x] 검색 기능
+- [ ] 검색 결과시 sort 기능
 
 ## Tech Stack/ Packages
 
