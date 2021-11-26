@@ -1,48 +1,37 @@
-import { createContext, useContext, Dispatch, useReducer } from "react";
+import { createContext, Dispatch, useReducer, useEffect } from "react";
 import { cartReducer } from "./Reducers";
 import { ProductPreview } from "../types/PreviewProduct";
-import { addPrefix } from "@chakra-ui/styled-system";
+
 export type CartDispatch = Dispatch<Action>;
-
-// export type ProductForCart = {
-//   prdouctDetail: ProductPreview;
-//   qty: number;
-// };
 export type Prefix = ProductPreview["prefix"];
-
 export type ProductForCart = {
   productDetail: ProductPreview;
   qty: number;
+  cartId?: string;
 };
 export type CartState = {
   cart: ProductForCart[];
 };
-// export type CartState = {
-//   cart: Record<Prefix, ProductForCart>[];
-// };
-
-// export type Action =
-//   | {
-//       type: "ADD_TO_CART";
-//       payload: Record<Prefix, ProductForCart>;
-//     }
-//   | {
-//       type: "CHANGE_CART_QTY";
-//       payload: Record<Prefix, ProductForCart>;
-//     };
 
 export type Action =
   | {
       type: "ADD_TO_CART";
       payload: ProductForCart;
     }
-  | { type: "REMOVE_FROM_CART"; payload: ProductForCart };
+  | { type: "UPDATE_CART_QTY"; payload: { qty: number; cartId: string } };
 
 export const CartStateContext = createContext<CartState | null>(null);
 export const CartDispatchContext = createContext<CartDispatch | null>(null);
 
+const initialState = () => {
+  const localData = localStorage.getItem("carts");
+  return localData ? JSON.parse(localData) : { cart: [] };
+};
 const CartContext = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, { cart: [] });
+  const [state, dispatch] = useReducer(cartReducer, { cart: [] }, initialState);
+  useEffect(() => {
+    localStorage.setItem("carts", JSON.stringify(state));
+  }, [state]);
   return (
     <CartStateContext.Provider value={state}>
       <CartDispatchContext.Provider value={dispatch}>
