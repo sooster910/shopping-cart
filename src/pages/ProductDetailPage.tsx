@@ -108,7 +108,7 @@ const ProductDetail = (props) => {
       {isError && <div> Error fetching data</div>}
       {status === "success" && (
         <>
-          <Flex>
+          <Flex mt={"8rem"}>
             <Container maxW="xl" centerContent>
               <Box padding="4" maxW="3xl" borderWidth="1px" borderRadius="lg">
                 <Image src={data?.mainImage} alt={data?.name} />
