@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DefaultBadgeProps } from "./DefaultBadge";
 import { DefaultBadge } from "./DefaultBadge";
-export interface SoldOutBadge extends DefaultBadgeProps {
+export interface SoldOutBadgeProps extends DefaultBadgeProps {
   fontSize?: string;
 }
 
@@ -10,7 +10,7 @@ export const SoldOutBadge = ({
   color,
   variation,
   ...props
-}: SoldOutBadge) => (
+}: SoldOutBadgeProps) => (
   <DefaultBadge color={color || "red"} variation={variation || "solid"}>
     {"soldout" || children}
   </DefaultBadge>
