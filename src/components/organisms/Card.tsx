@@ -1,8 +1,10 @@
 import * as React from "react";
 import { Image } from "@chakra-ui/react";
-import { Badge, Box } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
+import { Link } from "react-router-dom";
 
 type CardProps = {
+  id?: string;
   imageUrl?: string;
   imageAlt?: string;
   title?: string;
@@ -12,6 +14,7 @@ type CardProps = {
   children?: React.ReactNode;
 };
 export const Card = ({
+  id,
   imageUrl,
   imageAlt,
   title,
@@ -23,8 +26,9 @@ export const Card = ({
   return (
     <>
       <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-        {imageUrl && <Image src={imageUrl} alt={imageAlt} />}
-
+        <Link to={id ? `/product/${id}` : "#"}>
+          {imageUrl && <Image src={imageUrl} alt={imageAlt} />}
+        </Link>
         <Box p="6">
           <Box display="flex" alignItems="baseline">
             {badge ? badge : null}
@@ -52,8 +56,8 @@ export const Card = ({
 
           <Box display="flex" mt="2" alignItems="center">
             {detail ? detail : null}
-            {children}
           </Box>
+          {children}
         </Box>
       </Box>
     </>
