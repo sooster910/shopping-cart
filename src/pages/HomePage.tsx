@@ -18,11 +18,11 @@ const Home: React.FunctionComponent = ({ children }: HomeProps) => {
     setCategoryId(categoryId);
   };
 
-  const [searchTerm, setSearchTem] = React.useState("");
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   const handleSarchInput = (e) => {
-    let value = e.target.value.toLowerCase();
-    setSearchTem(value);
+    const { value } = e.target;
+    setSearchTerm(value.toLowerCase());
   };
   return (
     <>
