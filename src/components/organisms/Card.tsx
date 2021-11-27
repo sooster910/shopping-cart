@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Button, IconButton, Image } from "@chakra-ui/react";
-import { Box, Flex } from "@chakra-ui/layout";
+import { Image } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
-import { DeleteIcon, DragHandleIcon } from "@chakra-ui/icons";
 import { DeleteBtn } from "../molecules/DeleteBtn";
 
 type CardProps = {
