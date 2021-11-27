@@ -34,6 +34,10 @@ export const Cart = ({ btnRef, isOpen, onClose }) => {
       payload: { cartId: clickedId },
     });
   };
+  // const cartTotalPrice =  cartState?.cart?.reduce(
+  //   (acc, { quantity, price }) => acc + quantity * price,
+  //   0
+  // );
   return (
     <Drawer
       isOpen={isOpen}
@@ -45,7 +49,7 @@ export const Cart = ({ btnRef, isOpen, onClose }) => {
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader>장바구니</DrawerHeader>
-
+        {/* <Text> 총 주문금액 : {cartTotalPrice}</Text> */}
         <DrawerBody>
           <List
             items={cartState.cart}
@@ -68,10 +72,9 @@ export const Cart = ({ btnRef, isOpen, onClose }) => {
                     </Text>
                   </Box>
                 ))}
-
+                <Text>상품가격 : {item?.productDetail?.totalPrice}</Text>
                 <Text>총 수량 : {item?.qty}</Text>
                 <Text>
-                  {" "}
                   배송비:
                   {formatProductPrice(item?.productDetail?.shippingPrice)}
                 </Text>
