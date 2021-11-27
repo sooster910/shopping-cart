@@ -66,7 +66,7 @@ const ProductDetail = (props) => {
     console.log("addingto cart", options);
     const emptyOptions = [];
     for (const key in options) {
-      if (options[key] === "") {
+      if (options[key] === "" || options[key] == undefined) {
         emptyOptions.push(key);
       }
     }
