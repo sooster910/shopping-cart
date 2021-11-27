@@ -9,7 +9,7 @@ export interface DefaultButtonProps extends ButtonProps {
 
 export const DefalutButton = ({ children, ...props }: DefaultButtonProps) => {
   return (
-    <Button variant={props.variation} {...props}>
+    <Button data-testid="default-btn" variant={props.variation} {...props}>
       {children}
     </Button>
   );

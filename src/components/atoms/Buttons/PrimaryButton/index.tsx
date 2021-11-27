@@ -1,6 +1,6 @@
 import * as React from "react";
-import { DefalutButton } from "./DefaultButton";
-import { DefaultButtonProps } from "./DefaultButton";
+import { DefalutButton } from "../DefaultButton";
+import { DefaultButtonProps } from "../DefaultButton";
 
 export const PrimaryButton = ({ children, ...props }: DefaultButtonProps) => (
   <DefalutButton

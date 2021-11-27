@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import * as React from "react";
-import { DefalutButton } from "../atoms/DefaultButton";
+import { DefalutButton } from "../atoms/Buttons/DefaultButton";
 import { AddIcon } from "@chakra-ui/icons";
 
 type AddToCartProps = {
