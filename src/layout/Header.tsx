@@ -9,7 +9,7 @@ const Header = () => {
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cartState = useCartState();
-
+  const numOfCartItems = cartState.cart.length;
   return (
     <>
       <Navbar>
@@ -20,7 +20,7 @@ const Header = () => {
           colorScheme="teal"
           onClick={onOpen}
         >
-          Cart({cartState.cart.length})
+          CART({numOfCartItems})
         </Button>
         <Cart btnRef={btnRef} isOpen={isOpen} onClose={onClose} />
       </Navbar>
