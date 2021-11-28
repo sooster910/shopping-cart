@@ -11,6 +11,7 @@ export interface ProductPreview{
         id: number,
         name: string
     },
+    shippingPrice:number,
     originalPrice: number,
     ssomeePrice: number,
     soldOut : boolean,
