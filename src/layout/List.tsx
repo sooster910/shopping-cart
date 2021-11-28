@@ -1,11 +1,9 @@
-import * as React from "react";
-
-export const List = (props: {
-  items: any;
+export const List = <ItemType extends any>(props: {
+  items: ItemType[];
   renderItem: (item: any) => JSX.Element;
   renderEmpty: JSX.Element;
 }) => {
-  return !props?.items?.length ? (
+  return !props.items?.length ? (
     props.renderEmpty
   ) : (
     <ul

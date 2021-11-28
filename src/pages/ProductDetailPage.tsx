@@ -1,6 +1,4 @@
-import * as React from "react";
 import { Box, Container, Text } from "@chakra-ui/layout";
-import { Image } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { DefalutSpinner } from "../components/atoms/DefaultSpinner";
@@ -13,71 +11,19 @@ import { OptionForms } from "../components/organisms/OptionForms";
 import { formatProductPrice } from "../utils/formatProductPrice";
 import { Warning } from "../components/molecules/Warning";
 import { fetchProductsByPrefix } from "../api/productAPI";
-import { isDeepEqual } from "../utils/common";
+import { useItem } from "../hooks/useItem";
+import { isDeepEqual, validateOptions } from "../utils/common";
+import { ProductImage } from "../components/organisms/ProductImage";
 
-const ProductDetail = (props) => {
+const ProductDetail = () => {
   const { id }: any = useParams();
   const cartState = useCartState();
   const cartDispatch = useCartDispatch();
-
   const { isLoading, isError, data, status } = useQuery(["product", id], () =>
     fetchProductsByPrefix(id)
   );
-  const [optionWarning, setOptionWarning] = React.useState([]);
 
-  const [item, setItem] = React.useReducer(
-    (item, newDetails) => ({
-      ...item,
-      ...newDetails,
-    }),
-    {}
-  );
-  React.useEffect(() => {
-    const optionsKeys = data?.options?.map(
-      (option) => option.optionCategoryName
-    );
-    const options = optionsKeys?.reduce((a, v) => ({ ...a, [v]: "" }), {});
-    console.log("useEffect optins", options);
-    const initialItem = {
-      options,
-      prefix: data?.prefix,
-      imageUrl: data?.mainImage,
-      name: data?.name,
-      totalPrice: data?.ssomeePrice,
-      shippingPrice: data?.shippingPrice,
-      soldout: data?.soldOut,
-    };
-    setItem(initialItem);
-  }, [data]);
-
-  const handleSelectChange = (e) => {
-    const dataset = e.target.options[e.target.selectedIndex].dataset;
-    const newOptions = { ...item.options };
-    newOptions[e.target.name] = dataset.option;
-
-    const newPrice = Number(item?.totalPrice) + Number(e.target.value);
-    setItem({
-      totalPrice: newPrice,
-      options: newOptions,
-    });
-  };
-
-  const validateAddingToCart = (options) => {
-    console.log("addingto cart", options);
-    const emptyOptions = [];
-    for (const key in options) {
-      if (!options[key]) {
-        emptyOptions.push(key);
-      }
-    }
-    return emptyOptions;
-  };
-
-  const handleAddToCart = (clickedItem) => {
-    //option 유효성  검사
-    const missingOptions = validateAddingToCart(item.options);
-    setOptionWarning([...missingOptions]);
-    if (missingOptions.length) return;
+  const submitToCart = () => {
     if (!cartState?.cart?.length) {
       return cartDispatch({
         type: "ADD_TO_CART",
@@ -86,9 +32,9 @@ const ProductDetail = (props) => {
     }
 
     // 같은 상품 prefix, 옵션이 같은 상품이 있는지 확인 -> ADD_TO
-    const twinItem = cartState.cart.filter((cartItem) => {
-      return isDeepEqual(cartItem.productDetail, item);
-    });
+    const twinItem = cartState.cart.filter((cartItem) =>
+      isDeepEqual(cartItem.productDetail, item)
+    );
 
     if (twinItem.length) {
       return cartDispatch({
@@ -102,6 +48,13 @@ const ProductDetail = (props) => {
       });
     }
   };
+
+  const { item, handleSelectChange, handleAddToCart, errors } = useItem(
+    data,
+    submitToCart,
+    validateOptions
+  );
+
   return (
     <>
       {isLoading && <DefalutSpinner />}
@@ -109,11 +62,7 @@ const ProductDetail = (props) => {
       {status === "success" && (
         <>
           <Flex mt={"8rem"}>
-            <Container maxW="xl" centerContent>
-              <Box padding="4" maxW="3xl" borderWidth="1px" borderRadius="lg">
-                <Image src={data?.mainImage} alt={data?.name} />
-              </Box>
-            </Container>
+            <ProductImage mainImage={data.mainImage} productName={data.name} />{" "}
             <Container maxW="xl" centerContent>
               <Box display="flex" alignItems="baseline" mb="2">
                 <Box
@@ -154,6 +103,11 @@ const ProductDetail = (props) => {
                 </Box>
                 <Box>
                   <Text fontSize="l" mt="1" color="gray.500">
+                    Somee Price : {formatProductPrice(data.ssomeePrice)}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text fontSize="l" mt="1" color="gray.500">
                     Shipping Price : {formatProductPrice(data.shippingPrice)}
                   </Text>
                 </Box>
@@ -176,11 +130,11 @@ const ProductDetail = (props) => {
                 />
               </Box>
               <Box>
-                {optionWarning?.map((warning, idx) => (
+                {errors?.map((error, idx) => (
                   <Warning
                     key={idx}
                     status={"warning"}
-                    description={`${warning} 을 추가해주세요.`}
+                    description={`${error} 을 추가해주세요.`}
                   />
                 ))}
               </Box>
